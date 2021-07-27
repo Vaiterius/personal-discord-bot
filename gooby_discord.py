@@ -9,7 +9,7 @@ from discord.ext import commands, tasks
 
 TOKEN = os.environ["DISCORD_TOKEN"]
 
-description = "Da Gooby Bot\nUse the prefix 'gooby ' before every command!\ne.g. `gooby hello`\n\nSend me more ideas for this bot!"
+description = "Da Gooby Bot\nUse the prefix 'gooby ' (or 'gby ' or 'gb ') before every command!\ne.g. `gooby hello`\n\nSend me more ideas for this bot!"
 
 
 # class CustomHelpCommand(commands.HelpCommand):
@@ -52,7 +52,7 @@ intents = discord.Intents(
     guild_reactions=True)
 
 bot = commands.Bot(
-    command_prefix=['gooby ', 'gby '],
+    command_prefix=['gooby ', 'gby ', 'gb '],
     case_insensitive=True,  # For commands, not the prefix.
     description=description,
     intents=intents,
@@ -89,6 +89,7 @@ async def load(context, extension):
     if context.author.id in owner_ids:
         bot.load_extension(f"cogs.{extension}")
         print(f"File load of {extension}.py successful.")
+        await context.send(f"File load of {extension}.py successful.")
     else:
         await context.send("You do not have permission to do this")
 
@@ -100,6 +101,7 @@ async def unload(context, extension):
     if context.author.id in owner_ids:
         bot.unload_extension(f"cogs.{extension}")
         print(f"File unload of {extension}.py successful.")
+        await context.send(f"File unload of {extension}.py successful.")
     else:
         await context.send("You do not have permission to do this")
 
@@ -112,6 +114,7 @@ async def reload(context, extension):
         bot.unload_extension(f"cogs.{extension}")
         bot.load_extension(f"cogs.{extension}")
         print(f"File reload of {extension}.py successful.")
+        await context.send(f"File reload of {extension}.py successful.")
     else:
         await context.send("You do not have permission to do this")
 

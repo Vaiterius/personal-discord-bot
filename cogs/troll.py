@@ -11,11 +11,18 @@ class Troll(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.toggle_troll_vc_listener = True
+        self.toggle_troll_chat_listener = True
+        self.toggle_troll_commands = True
     
 
     @commands.Cog.listener()
     async def on_message(self, message):
         """Idek man"""
+
+        if not self.toggle_troll_chat_listener:
+            return
+
         username = str(message.author.name)
         user_message = str(message.content)
         split_message = user_message.lower().split()
@@ -46,6 +53,9 @@ class Troll(commands.Cog):
     async def on_voice_state_update(self, member, before, after):
         """Whenever a user joins, the bot joins and plays an randomly-selected audio file"""
 
+        if not self.toggle_troll_vc_listener:
+            return
+
         audio_files = [audio for audio in os.listdir("./audio_files")]
 
         vc_before = before.channel
@@ -72,6 +82,27 @@ class Troll(commands.Cog):
             with audioread.audio_open(source_file) as f:
                 await sleep(f.duration)
             await vc.disconnect()
+    
+
+    @commands.command(name='toggletroll', aliases=['tt', 'toggle'])
+    async def toggle_troll(self, context, code):
+        """
+        Toggle options if you don't want these features
+        __NOTE:__ These toggles are True (on) by default whenever the bot restarts
+        of if this Cog is reloaded/loaded.
+        **CODE:**
+        0 - disable troll chat listener
+        1 - disable troll vc listener
+        """
+        code = int(code)
+        if code == 0:
+            self.toggle_troll_chat_listener =  not self.toggle_troll_chat_listener
+            print("Chat listener toggled:", self.toggle_troll_chat_listener)
+            await context.send(f"Chat listener toggled: {self.toggle_troll_chat_listener}")
+        elif code == 1:
+            self.toggle_troll_vc_listener = not self.toggle_troll_vc_listener
+            print("VC listener toggled:", self.toggle_troll_vc_listener)
+            await context.send(f"VC listener toggled: {self.toggle_troll_vc_listener}")
 
 
 def setup(bot):
