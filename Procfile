@@ -1,0 +1,1 @@
+worker: python gooby_discord.py
