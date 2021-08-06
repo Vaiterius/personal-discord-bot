@@ -40,10 +40,15 @@ class ChatListener(commands.Cog):
             "Come back when you've learned some manners", "I am not amused", "That was very naughty",
             "You kiss your mother with that mouth?", "Take a chill pill bro", "Watch yo profanity")
         
-        if split_message[0] in greetings and split_message[1].startswith("gooby"):
-            await message.channel.send(random.choice(pos_responses))
-        elif user_message.startswith(insults) and "gooby" in split_message:
-            await message.channel.send(random.choice(neg_responses))
+        try:
+            if split_message[0] in greetings and split_message[1].startswith("gooby"):
+                await message.channel.send(random.choice(pos_responses))
+            elif user_message.startswith(insults) and "gooby" in split_message:
+                await message.channel.send(random.choice(neg_responses))
+        except IndexError as e:
+            pass
+        except Exception as e:
+            print(f"FROM LISTENER COG: {e}")
 
 
 def setup(bot):

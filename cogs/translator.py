@@ -8,8 +8,6 @@ from discord.ext import commands
 
 from google.cloud import translate_v2
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "amplified-land-320518-79db4ec83d30.json"
-
 class Translator(commands.Cog, name='Translator'):
     """
     Translates text into the target language utilizing
