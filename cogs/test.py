@@ -10,7 +10,7 @@ class Test(commands.Cog):
         self.bot = bot
     
 
-    # @commands.command()
+    # @commands.command()s
     # async def listlangs(self, context):
     #     """Lists all available languages"""
     #     results = translate_client.get_languages()

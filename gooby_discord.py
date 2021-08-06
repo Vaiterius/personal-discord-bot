@@ -12,7 +12,7 @@ TOKEN = os.environ["DISCORD_TOKEN"]
 description = "Da Gooby Bot\nUse the prefix 'gooby ' (or 'gby ' or 'gb ') before every command!\ne.g. `gooby hello`\n\nSend me more ideas for this bot!"
 
 
-# class CustomHelpCommand(commands.HelpCommand):
+# class CustomHelpCommand(commands.HelpCommand):d
 
 #     def __init__(self):
 #         super().__init__()
