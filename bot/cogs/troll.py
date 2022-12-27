@@ -9,7 +9,7 @@ import audioread
 import discord
 from discord.ext import commands
 
-mongo_url = os.environ["MONGO_GOOBY_URL"]
+mongo_url = os.environ.get("MONGO_GOOBI_URL")
 
 class Troll(commands.Cog):
 
@@ -277,6 +277,6 @@ class Troll(commands.Cog):
                 await context.send(f"VC listener toggled: `{update_tt_vc_listener}`")
 
 
-def setup(bot):
-    bot.add_cog(Troll(bot))
+async def setup(bot):
+    await bot.add_cog(Troll(bot))
 

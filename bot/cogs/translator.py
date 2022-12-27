@@ -22,7 +22,6 @@ credentials_dict = {
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": os.environ.get("CLIENT_x509_CERT_URL")
 }
-pprint(credentials_dict)
 credentials = service_account.Credentials.from_service_account_info(credentials_dict)
 
 
